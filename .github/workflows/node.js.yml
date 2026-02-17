@@ -32,5 +32,12 @@ jobs:
     - name: Build
       run: npm run build 
 
+    - name: Use Secret
+      run: |
+        echo "Secret length: ${#TOKEN}"
+        echo "Secret starts with: ${TOKEN::3}***"
+      env:
+        TOKEN: ${{ secrets.API_TOKEN }}
+
     - name: Success
       run: echo "✅ Node ${{ matrix.node-version }} SUCCESS!"
