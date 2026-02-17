@@ -16,14 +16,12 @@ jobs:
       fail-fast: false
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
 
     - name: Install deps
       run: npm install
@@ -32,9 +30,7 @@ jobs:
       run: npm test
 
     - name: Build
-      run: npm run build
+      run: npm run build 
 
-    - name: Use secret
-      run: echo "Secret OK!"
-      env:
-        TOKEN: ${{ secrets.API_TOKEN }}
+    - name: Success
+      run: echo "✅ Node ${{ matrix.node-version }} SUCCESS!"
