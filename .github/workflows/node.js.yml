@@ -36,3 +36,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Use secret
+        run: echo "Secret starts with: ${{ secrets.API_TOKEN }}"
+        env:
+          TOKEN: ${{ secrets.API_TOKEN }}
+
