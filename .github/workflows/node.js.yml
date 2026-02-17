@@ -15,18 +15,18 @@ jobs:
         node-version: [18.x, 20.x, 22.x]
       fail-fast: false
 
-    steps:
+    steps:  # ← TO JEST KLUCZOWE - każdy step musi być pod steps!
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }} 
-        cache: 'npm' 
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
     - name: Install deps
-      run: npm ci 
+      run: npm ci
 
     - name: Run tests
       run: npm test
@@ -34,8 +34,8 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Use secret (opcjonalne)
-      if: secrets.API_TOKEN != ''  
-      run: echo "Secret OK: ${{ secrets.API_TOKEN != '' && '***MASKED***' || 'NOT SET' }}"
+    - name: Use secret  # ← Teraz poprawnie pod steps z run:
+      if: secrets.API_TOKEN != ''
+      run: echo "Secret OK!"
       env:
         TOKEN: ${{ secrets.API_TOKEN }}
